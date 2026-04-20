@@ -125,18 +125,18 @@ const DROPDOWNS = {
     cols: [
       {
         items: [
-          { icon: <IcoDollar />, label: 'Checking', desc: 'Everyday banking', to: '/explore' },
-          { icon: <IcoPhone />, label: 'Savings', desc: 'High-yield savings accounts', to: '/explore' },
-          { icon: <IcoStar />, label: 'Investments', desc: 'Automated portfolio management', to: '/signup' },
-          { icon: <IcoUser />, label: 'Retirement', desc: 'IRA and 401(k) rollovers', to: '/signup' },
+          { icon: <IcoDollar />, label: 'Spot Trading', desc: 'Buy and sell top assets', to: '/explore' },
+          { icon: <IcoPhone />, label: 'Staking', desc: 'Earn rewards on supported assets', to: '/explore' },
+          { icon: <IcoStar />, label: 'Recurring Buys', desc: 'Automated DCA portfolio building', to: '/signup' },
+          { icon: <IcoUser />, label: 'Self Custody', desc: 'Manage your onchain wallet securely', to: '/signup' },
         ],
       },
       {
         items: [
-          { icon: <IcoTrend />, label: 'Trading', desc: 'Active trading platform', to: '/explore' },
-          { icon: <IcoCard />, label: 'Credit Cards', desc: 'Rewards and cash back', to: '/signup' },
-          { icon: <IcoShield />, label: 'Loans', desc: 'Personal and home loans', to: '/explore' },
-          { icon: <IcoSwap />, label: 'Transfers', desc: 'Global money movement', to: '/explore' },
+          { icon: <IcoTrend />, label: 'Advanced Trade', desc: 'Pro charts, depth, and orders', to: '/advanced-trading' },
+          { icon: <IcoCard />, label: 'Coinbase Card', desc: 'Spend crypto and earn rewards', to: '/signup' },
+          { icon: <IcoShield />, label: 'Derivatives', desc: 'Perpetual futures for eligible users', to: '/explore' },
+          { icon: <IcoSwap />, label: 'Convert', desc: 'Instantly swap between assets', to: '/explore' },
         ],
       },
     ],
@@ -149,26 +149,26 @@ const DROPDOWNS = {
           </svg>
         </div>
       ),
-      title: 'Financial Freedom',
-      body: 'Banking, investing, and planning built for you.',
-      cta: 'Open account',
+      title: 'Trade with confidence',
+      body: 'Execution, custody, and staking in one Coinbase experience.',
+      cta: 'Start trading',
       to: '/signup',
     },
   },
   businesses: { // Now "Business"
     cols: [
       {
-        header: { label: 'Banking', hasLink: false },
+        header: { label: 'Trading', hasLink: false },
         items: [
-          { icon: <IcoBrief />, label: 'Business Checking', desc: 'Manage cash flow', to: '/explore' },
-          { icon: <IcoDollar />, label: 'Payroll', desc: 'Automated team payments', to: '/explore' },
+          { icon: <IcoBrief />, label: 'Prime Trading', desc: 'Institutional-grade execution', to: '/explore' },
+          { icon: <IcoDollar />, label: 'Treasury Ops', desc: 'Manage USDC and digital balances', to: '/explore' },
         ],
       },
       {
         header: { label: 'Growth', hasLink: false },
         items: [
-          { icon: <IcoTrend />, label: 'Capital', desc: 'Business financing & loans', to: '/explore' },
-          { icon: <IcoShield />, label: 'Treasury', desc: 'Yield on idle cash', to: '/explore' },
+          { icon: <IcoTrend />, label: 'Market Access', desc: 'Deep liquidity across pairs', to: '/explore' },
+          { icon: <IcoShield />, label: 'Custody', desc: 'Secure storage for corporate assets', to: '/explore' },
         ],
       },
     ],
@@ -181,8 +181,8 @@ const DROPDOWNS = {
           </svg>
         </div>
       ),
-      title: 'Scale your business',
-      body: 'Integrated financial tools for modern companies.',
+      title: 'Scale your crypto operations',
+      body: 'Integrated trading, custody, and treasury tools for modern companies.',
       cta: 'Get started',
       to: '/signup',
     },
@@ -465,6 +465,14 @@ function Navbar() {
           {user ? (
             <>
               <Link
+                to="/dashboard#add-crypto"
+                style={{ padding: '8px 14px', fontSize: '0.875rem', fontWeight: '700', color: '#1652F0', textDecoration: 'none', borderRadius: '8px', whiteSpace: 'nowrap', background: '#EEF2FF' }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#E0E7FF'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = '#EEF2FF'; }}
+              >
+                Add Crypto
+              </Link>
+              <Link
                 to="/dashboard"
                 style={{ padding: '8px 14px', fontSize: '0.875rem', fontWeight: '600', color: isActive('/dashboard') ? '#7C3AED' : '#374151', textDecoration: 'none', borderRadius: '8px', whiteSpace: 'nowrap' }}
                 onMouseEnter={e => { e.currentTarget.style.background = '#F3F4F6'; }}
@@ -561,6 +569,7 @@ function Navbar() {
           <div style={{ display: 'flex', gap: '10px', marginTop: '16px', padding: '0 8px' }}>
             {user ? (
               <>
+                <Link to="/dashboard#add-crypto" onClick={() => setIsMobileMenuOpen(false)} style={{ flex: 1, padding: '11px', textAlign: 'center', fontSize: '0.9375rem', fontWeight: '700', color: '#1652F0', background: '#EEF2FF', borderRadius: '10px', textDecoration: 'none' }}>Add Crypto</Link>
                 <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)} style={{ flex: 1, padding: '11px', textAlign: 'center', fontSize: '0.9375rem', fontWeight: '700', color: '#7C3AED', background: '#F5F3FF', borderRadius: '10px', textDecoration: 'none' }}>Dashboard</Link>
                 <button onClick={handleLogout} style={{ flex: 1, padding: '11px', textAlign: 'center', fontSize: '0.9375rem', fontWeight: '700', color: '#DC2626', background: '#FEE2E2', border: 'none', borderRadius: '10px', cursor: 'pointer' }}>Sign out</button>
               </>

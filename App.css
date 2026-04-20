@@ -495,3 +495,78 @@ html {
     font-size: 1.5rem !important;
   }
 }
+
+/* ─────────────────────────────────────────
+   Auth + Profile Settings mobile fit
+───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .auth-main {
+    align-items: flex-start !important;
+    padding: 14px 16px 28px !important;
+  }
+
+  .auth-card {
+    max-width: 100% !important;
+  }
+
+  .auth-option-btn {
+    font-size: 0.9375rem !important;
+    padding: 12px !important;
+  }
+
+  .dashboard-header-row {
+    padding: 16px !important;
+    gap: 10px !important;
+  }
+
+  .profile-settings-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .profile-modal-overlay {
+    padding: 12px !important;
+    align-items: flex-end !important;
+  }
+
+  .profile-modal-card {
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    border-radius: 14px !important;
+  }
+
+  .profile-modal-actions {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-main {
+    padding: 12px 12px 22px !important;
+  }
+
+  .auth-option-btn {
+    font-size: 0.875rem !important;
+    gap: 8px !important;
+    padding: 11px !important;
+  }
+
+  .profile-modal-overlay {
+    padding: 8px !important;
+  }
+
+  .profile-modal-card {
+    max-width: 100% !important;
+    max-height: 92vh !important;
+  }
+
+  .profile-modal-actions {
+    flex-direction: column-reverse !important;
+  }
+
+  .profile-modal-actions button {
+    width: 100% !important;
+  }
+}

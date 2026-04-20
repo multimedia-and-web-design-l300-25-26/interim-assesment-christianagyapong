@@ -106,11 +106,11 @@ function PhoneMockup() {
 
         <div style={{ padding: '0 16px' }}>
           {[
-            { ico: 'C', label: 'Checking',    val: '₵24,140.70', c: '#F59E0B', up: true },
-            { ico: 'S', label: 'Savings',     val: '₵128,516.88', c: '#6366F1', up: true },
-            { ico: 'I', label: 'Investments', val: '₵52,351.67',   c: '#8B5CF6', up: true  },
-            { ico: 'D', label: 'Debt',        val: '-₵4,674.50',   c: '#EF4444', up: false  },
-            { ico: 'W', label: 'Wallet',      val: '₵1,962.68', c: '#22C55E', up: false },
+            { ico: '₿', label: 'Bitcoin',   val: '₵24,140.70', c: '#F59E0B', up: true },
+            { ico: 'Ξ', label: 'Ethereum',  val: '₵128,516.88', c: '#6366F1', up: true },
+            { ico: '◎', label: 'Solana',    val: '₵52,351.67', c: '#8B5CF6', up: true  },
+            { ico: '$', label: 'USDC',      val: '₵4,674.50',  c: '#3B82F6', up: true  },
+            { ico: 'C', label: 'Cash',      val: '₵1,962.68', c: '#22C55E', up: false },
           ].map(({ ico, label, val, c, up }) => (
             <div key={label} style={{ display: 'flex', alignItems: 'center', paddingBottom: '10px' }}>
               <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: c + '22', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '10px', flexShrink: 0 }}>
@@ -125,7 +125,7 @@ function PhoneMockup() {
         </div>
 
         <p style={{ padding: '4px 16px 14px', fontSize: '9.5px', color: '#9CA3AF', lineHeight: '1.4' }}>
-          Personalized financial insights based on your spending habits.
+          Live portfolio insights based on your current market positions.
         </p>
       </div>
     </div>
@@ -133,7 +133,7 @@ function PhoneMockup() {
 }
 
 function Home() {
-  const [activeTab, setActiveTab] = useState('tradable');
+  const [activeTab, setActiveTab] = useState('spot');
   const liveData = useLivePrices();
   const topCryptos = (liveData ?? cryptoData).slice(0, 4);
 
@@ -160,10 +160,10 @@ function Home() {
           </div>
           <div className="hero-anim-right">
             <h1 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.75rem)', fontWeight: '800', color: '#111827', lineHeight: '1.1', letterSpacing: '-0.035em', marginBottom: '16px' }}>
-              Your financial life,<br />all in one place.
+              Your crypto portfolio,<br />all in one place.
             </h1>
             <p style={{ fontSize: '1rem', color: '#D97706', fontWeight: '600', marginBottom: '32px', lineHeight: '1.6' }}>
-              Manage payments, savings, and investments on a platform you can trust.
+              Buy, sell, stake, and track top assets on a platform traders trust.
             </p>
             <Link
               to="/signup"
@@ -181,10 +181,10 @@ function Home() {
         <div ref={exploreRef} style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '56px', alignItems: 'center' }} className="explore-grid reveal reveal-fade-up">
           <div>
             <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: '800', color: '#111827', letterSpacing: '-0.025em', lineHeight: '1.15', marginBottom: '16px' }}>
-              Grow your<br />wealth today
+              Trade markets<br />in real time
             </h2>
             <p style={{ fontSize: '1.0625rem', color: '#6B7280', lineHeight: '1.7', marginBottom: '32px' }}>
-              Simply and securely manage your budget, track expenses, and grow your savings.
+              Follow top movers, manage positions, and execute trades with confidence.
             </p>
             <Link to="/explore" style={{ display: 'inline-block', background: '#1652F0', color: '#fff', fontWeight: '700', fontSize: '0.9375rem', padding: '13px 28px', borderRadius: '8px', textDecoration: 'none' }}>
               See all features
@@ -193,7 +193,7 @@ function Home() {
 
           <div className="home-explore-panel" style={{ background: 'linear-gradient(145deg, #1652F0, #0A3ECF)', borderRadius: '20px', padding: '20px', boxShadow: '0 20px 48px rgba(22,82,240,0.35)' }}>
             <div className="home-explore-tabs" style={{ display: 'flex', gap: '3px', marginBottom: '16px', background: 'rgba(255,255,255,0.12)', padding: '4px', borderRadius: '10px' }}>
-              {[['personal','Personal'],['business','Business'],['global','Global']].map(([k, lbl]) => (
+              {[['spot','Spot'],['futures','Futures'],['onchain','Onchain']].map(([k, lbl]) => (
                 <button key={k} onClick={() => setActiveTab(k)} style={{ flex: 1, padding: '8px 4px', borderRadius: '7px', border: 'none', cursor: 'pointer', fontSize: '11px', fontWeight: '600', background: activeTab === k ? '#ffffff' : 'transparent', color: activeTab === k ? '#1652F0' : 'rgba(255,255,255,0.65)', transition: 'all 0.15s', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {lbl}
                 </button>
@@ -201,10 +201,10 @@ function Home() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {[
-                { id: 1, name: 'Salary Deposit', symbol: 'Sept 24', price: 4250.00, change24h: 0, isPos: true },
-                { id: 2, name: 'Grocery Store', symbol: 'Sept 23', price: 156.40, change24h: -156.40, isPos: false },
-                { id: 3, name: 'Electric Bill', symbol: 'Sept 22', price: 84.20, change24h: -84.20, isPos: false },
-                { id: 4, name: 'Savings Transfer', symbol: 'Sept 21', price: 500.00, change24h: -500.00, isPos: false },
+                { id: 1, name: 'BTC Buy Filled',  symbol: '0.042 BTC • 2m ago', price: 4250.00, change24h: 0, isPos: true },
+                { id: 2, name: 'ETH Sell Filled', symbol: '0.75 ETH • 15m ago', price: 156.40, change24h: -156.40, isPos: false },
+                { id: 3, name: 'SOL Limit Buy',   symbol: '12 SOL • 1h ago',    price: 84.20, change24h: -84.20, isPos: false },
+                { id: 4, name: 'USDC Top-up',     symbol: '500 USDC • 3h ago',  price: 500.00, change24h: -500.00, isPos: false },
               ].map((tx) => {
                 const isPos = tx.isPos;
                 const iconColor = isPos ? '#22C55E' : '#EF4444'; 
@@ -245,7 +245,7 @@ function Home() {
                 <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#F59E0B', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <span style={{ color: '#fff', fontSize: '10px', fontWeight: '900' }}>$</span>
                 </div>
-                <span style={{ color: '#E5E7EB', fontSize: '12px', fontWeight: '700' }}>Net Worth</span>
+                <span style={{ color: '#E5E7EB', fontSize: '12px', fontWeight: '700' }}>Portfolio Value</span>
                 <span style={{ color: '#22C55E', fontSize: '11px', fontWeight: '600' }}>+4.2%</span>
               </div>
               <div style={{ display: 'flex', gap: '8px' }}>
@@ -268,31 +268,31 @@ function Home() {
               <path d="M0,100 C 50,80 100,110 150,60 C 200,40 250,50 300,20 C 350,10 380,5 380,5" stroke="#22C55E" strokeWidth="2" fill="none" />
             </svg>
             
-            {/* Monthly Budget Panel */}
+            {/* Daily P/L Panel */}
             <div style={{ margin: '0 12px 12px', background: '#111213', borderRadius: '10px', padding: '10px 12px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                  <p style={{ fontSize: '10px', color: '#6B7280', fontWeight: '700', letterSpacing: '0.05em', margin: 0 }}>MONTHLY BUDGET</p>
-                  <p style={{ fontSize: '10px', color: '#22C55E', fontWeight: '700', margin: 0 }}>On Track</p>
+                  <p style={{ fontSize: '10px', color: '#6B7280', fontWeight: '700', letterSpacing: '0.05em', margin: 0 }}>DAILY P/L</p>
+                  <p style={{ fontSize: '10px', color: '#22C55E', fontWeight: '700', margin: 0 }}>+3.24%</p>
               </div>
               <div style={{ background: '#374151', height: '4px', borderRadius: '2px', width: '100%', marginBottom: '4px' }}>
                  <div style={{ background: '#22C55E', height: '100%', borderRadius: '2px', width: '65%' }}></div>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: '9px', color: '#9CA3AF' }}>Spent: ₵1,240</span>
-                  <span style={{ fontSize: '9px', color: '#9CA3AF' }}>Limit: ₵2,000</span>
+                  <span style={{ fontSize: '9px', color: '#9CA3AF' }}>Open P/L: ₵1,240</span>
+                  <span style={{ fontSize: '9px', color: '#9CA3AF' }}>Closed P/L: ₵2,000</span>
               </div>
             </div>
           </div>
           {/* Text */}
           <div>
             <h2 style={{ fontSize: 'clamp(1.875rem, 4vw, 3rem)', fontWeight: '800', color: '#111827', lineHeight: '1.12', letterSpacing: '-0.03em', marginBottom: '16px' }}>
-              Smart insights for<br />smarter decisions.
+              Advanced analytics for<br />smarter trades.
             </h2>
             <p style={{ fontSize: '1rem', color: '#D97706', fontWeight: '600', marginBottom: '12px', lineHeight: '1.6' }}>
-              Track spending, visualize trends, and optimize your budget with our analytics suite.
+              Track market momentum, visualize trends, and optimize your strategy with pro analytics.
             </p>
             <p style={{ fontSize: '0.9375rem', color: '#6B7280', lineHeight: '1.7', marginBottom: '32px' }}>
-              Get real-time updates on your net worth, categorize expenses automatically, and forecast your savings growth.
+              Get real-time updates on portfolio performance, risk exposure, and potential upside.
             </p>
             <Link to="/dashboard" style={{ display: 'inline-block', background: '#111827', color: '#fff', fontWeight: '700', fontSize: '0.9375rem', padding: '13px 28px', borderRadius: '99px', textDecoration: 'none' }}>
               View Analytics
@@ -313,10 +313,10 @@ function Home() {
               <span style={{ fontSize: '11px', fontWeight: '700', color: '#374151', letterSpacing: '0.05em', textTransform: 'uppercase' }}>PREMIUM PLAN</span>
             </div>
             <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3.25rem)', fontWeight: '800', color: '#111827', lineHeight: '1.1', letterSpacing: '-0.035em', marginBottom: '16px' }}>
-              Zero transaction fees,<br />more rewards.
+              Lower trading fees,<br />more rewards.
             </h2>
             <p style={{ fontSize: '1rem', color: '#D97706', fontWeight: '600', marginBottom: '12px', lineHeight: '1.6' }}>
-              Get more out of your money with one membership: zero transfer fees, boosted savings rates, priority support, and more.
+              Get more from every trade with one membership: reduced fees, boosted staking rewards, and priority support.
             </p>
             <Link to="/signup" style={{ display: 'inline-block', background: '#111827', color: '#fff', fontWeight: '700', fontSize: '0.9375rem', padding: '13px 28px', borderRadius: '99px', textDecoration: 'none', marginTop: '8px' }}>
               Start free trial
@@ -338,8 +338,8 @@ function Home() {
                   <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                 </div>
               </div>
-              <p style={{ fontSize: '15px', fontWeight: '700', color: '#111827', margin: '0 0 4px' }}>Transfer successful!</p>
-              <p style={{ fontSize: '12px', color: '#6B7280', margin: 0 }}>You sent ₵500.00 to Savings</p>
+              <p style={{ fontSize: '15px', fontWeight: '700', color: '#111827', margin: '0 0 4px' }}>Order successful!</p>
+              <p style={{ fontSize: '12px', color: '#6B7280', margin: 0 }}>You bought ₵500.00 worth of BTC</p>
             </div>
             <div style={{ background: '#ffffff', borderRadius: '12px', padding: '12px 14px', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
               <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#1652F0', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -355,7 +355,7 @@ function Home() {
               </div>
               <div>
                 <p style={{ fontSize: '11px', fontWeight: '700', color: '#111827', margin: '0 0 2px' }}>Exclusive member benefits</p>
-                <p style={{ fontSize: '10px', color: '#6B7280', margin: '0 0 4px', lineHeight: '1.4' }}>Premium members earn 4.5% APY on savings.</p>
+                <p style={{ fontSize: '10px', color: '#6B7280', margin: '0 0 4px', lineHeight: '1.4' }}>Premium members unlock boosted staking rewards and fee discounts.</p>
                 <a href="#" style={{ fontSize: '10px', color: '#1652F0', fontWeight: '600', textDecoration: 'none' }}>Learn more</a>
               </div>
             </div>
@@ -423,8 +423,8 @@ function Home() {
                     ))}
                   </svg>
                 ),
-                title: 'Can crypto really replace your bank account?',
-                desc: "If you're a big enough fan of crypto, you've probably heard the phrase \"be your own bank\" or the term \"bankless\" — the idea being that...",
+                title: 'Can crypto become your primary trading stack?',
+                desc: "From self-custody tools to exchange liquidity, here’s how traders build full crypto-native workflows for daily execution...",
               },
               {
                 bg: '#D1FAE5',

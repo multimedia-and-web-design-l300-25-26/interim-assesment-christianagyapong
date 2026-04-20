@@ -99,7 +99,7 @@ function SignUp() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0A0B0D', display: 'flex', flexDirection: 'column' }}>
+    <div className="auth-shell" style={{ minHeight: '100vh', background: '#0A0B0D', display: 'flex', flexDirection: 'column' }}>
       {/* Logo */}
       <div style={{ padding: '22px 28px' }}>
         <Link to="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>
@@ -111,8 +111,8 @@ function SignUp() {
       </div>
 
       {/* Main content */}
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px 24px 48px' }}>
-        <div ref={formRef} style={{ width: '100%', maxWidth: '480px' }} className="reveal reveal-fade-up">
+      <div className="auth-main" style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px 24px 48px' }}>
+        <div ref={formRef} style={{ width: '100%', maxWidth: '480px' }} className="auth-card reveal reveal-fade-up">
 
           {/* ── STEP 1: Account type picker ── */}
           {step === 1 && (
@@ -123,6 +123,7 @@ function SignUp() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {ACCOUNT_TYPES.map((type) => (
                   <button
+                    className="auth-option-btn"
                     key={type.id}
                     onClick={() => handleSelectType(type.id)}
                     onMouseEnter={() => setHoveredType(type.id)}
@@ -304,6 +305,7 @@ function SignUp() {
                   },
                 ].map(({ label, icon }) => (
                   <button
+                    className="auth-option-btn"
                     key={label}
                     type="button"
                     style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', background: '#111213', border: '1px solid #232427', borderRadius: '10px', padding: '13px', color: '#fff', fontWeight: '700', fontSize: '1rem', cursor: 'pointer' }}

@@ -61,7 +61,7 @@ const TIPS_LARGE = [
   {
     id: 'tl-1', tag: 'GETTING STARTED', img: 'earnRewards',
     title: 'How to earn crypto rewards',
-    excerpt: 'Staking, savings accounts, and earn programs  here are all the ways you can put your crypto to work and earn passive income.',
+    excerpt: 'Staking, liquidity programs, and earn campaigns — here are the top ways to put your crypto to work and generate yield.',
   },
   {
     id: 'tl-2', tag: 'GETTING STARTED', img: 'cryptocurrency',

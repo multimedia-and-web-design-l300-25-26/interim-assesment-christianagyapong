@@ -64,3 +64,58 @@ Send data to the backend API and ensure it is properly stored in the database (M
 Push your backend code to GitHub Classroom, deploy the backend (recommended: Render), and integrate it into your Coinbase clone frontend repository. After completing the integration, deploy the updated frontend as well. Finally, submit the links to your deployed backend, deployed frontend, and your updated Coinbase clone repository via the Google Form attached.
 
 **NOTE:** Ensure that all submitted links are accurate and working, as no marks will be awarded for invalid or inaccessible submissions.
+
+## Deployment Checklist (GitHub Classroom + Render + Frontend)
+
+Use this exact flow to complete the final submission requirement.
+
+### A) Push code to GitHub Classroom
+
+1. Ensure your latest backend + frontend changes are committed.
+2. Push to your classroom repository:
+	- Repository: `interim-assesment-ChristianAgyapong`
+
+### B) Deploy backend on Render
+
+1. Create a new **Web Service** on Render from this repository.
+2. Configure backend service settings:
+	- **Root Directory**: `backend`
+	- **Build Command**: `npm install`
+	- **Start Command**: `npm start`
+3. Add backend environment variables in Render:
+	- `NODE_ENV=production`
+	- `PORT=10000` (or leave Render default)
+	- `MONGODB_URI=<your MongoDB Atlas connection string>`
+	- `JWT_SECRET=<strong random secret>`
+	- `JWT_EXPIRE=7d`
+	- `FRONTEND_URL=<your deployed frontend URL>`
+	  - If needed, support multiple frontends using comma-separated URLs.
+
+> This project does **not** require any external crypto API key. Crypto data is served from your own backend + MongoDB.
+
+### C) Integrate deployed backend into frontend
+
+1. In frontend environment config, set:
+	- `VITE_API_BASE_URL=<your Render backend URL>`
+2. Verify frontend requests go to deployed backend endpoints (`/api/auth`, `/api/profile`, `/api/crypto`).
+
+### D) Deploy frontend
+
+Deploy with Vercel, Netlify, or Render Static Site and set:
+
+- `VITE_API_BASE_URL=<your Render backend URL>`
+
+Then verify:
+- Register works
+- Login works
+- Protected profile loads
+- Crypto lists load (`/crypto`, `/crypto/gainers`, `/crypto/new`)
+- Add crypto works (authenticated)
+
+### E) Submit required links
+
+Submit all three:
+
+1. Deployed backend URL
+2. Deployed frontend URL
+3. GitHub Classroom repository URL

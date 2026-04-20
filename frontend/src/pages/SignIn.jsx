@@ -1,9 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import useReveal from '../hooks/useReveal';
-
-// useReveal is imported from src/hooks/useReveal.js
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -24,7 +22,7 @@ function SignIn() {
     setIsSubmitting(false);
 
     if (result.success) {
-      navigate('/dashboard');
+      navigate('/');
       return;
     }
 
@@ -32,7 +30,7 @@ function SignIn() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #4A1D96 0%, #312E81 100%)', display: 'flex', flexDirection: 'column' }}>
+    <div className="auth-shell" style={{ minHeight: '100vh', background: '#0A0B0D', display: 'flex', flexDirection: 'column' }}>
       {/* Logo */}
       <div style={{ padding: '22px 28px' }}>
         <Link to="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>
@@ -44,12 +42,15 @@ function SignIn() {
       </div>
 
       {/* Main content */}
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px 24px 64px' }}>
-        <div ref={formRef} style={{ width: '100%', maxWidth: '480px' }} className="reveal reveal-fade-up">
+      <div className="auth-main" style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px 24px 48px' }}>
+        <div ref={formRef} style={{ width: '100%', maxWidth: '480px' }} className="auth-card reveal reveal-fade-up">
 
-          <h1 style={{ color: '#fff', fontSize: 'clamp(1.6rem, 5vw, 2rem)', fontWeight: '800', marginBottom: '28px', letterSpacing: '-0.025em', lineHeight: '1.2' }}>
-            Sign in to Coinbase
+          <h1 style={{ color: '#fff', fontSize: 'clamp(1.5rem, 5vw, 2rem)', fontWeight: '800', marginBottom: '8px', letterSpacing: '-0.025em', lineHeight: '1.2' }}>
+            Welcome back
           </h1>
+          <p style={{ color: '#9CA3AF', fontSize: '0.9375rem', marginBottom: '28px', lineHeight: '1.55' }}>
+            Sign in to continue trading and tracking your portfolio.
+          </p>
 
           <form onSubmit={handleSubmit}>
             <label style={{ display: 'block', color: '#E5E7EB', fontWeight: '600', fontSize: '0.875rem', marginBottom: '8px' }}>
@@ -60,7 +61,7 @@ function SignIn() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
+              placeholder="Your email address"
               style={{
                 width: '100%',
                 background: 'transparent',
@@ -85,7 +86,7 @@ function SignIn() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
+              placeholder="Your password"
               style={{
                 width: '100%',
                 background: 'transparent',
@@ -143,6 +144,7 @@ function SignIn() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '28px' }}>
             {/* Passkey */}
             <button
+              className="auth-option-btn"
               type="button"
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', background: '#111213', border: '1px solid #232427', borderRadius: '10px', padding: '13px', color: '#fff', fontWeight: '700', fontSize: '1rem', cursor: 'pointer' }}
               onMouseEnter={e => { e.currentTarget.style.background = '#18191C'; }}
@@ -160,6 +162,7 @@ function SignIn() {
 
             {/* Google */}
             <button
+              className="auth-option-btn"
               type="button"
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', background: '#111213', border: '1px solid #232427', borderRadius: '10px', padding: '13px', color: '#fff', fontWeight: '700', fontSize: '1rem', cursor: 'pointer' }}
               onMouseEnter={e => { e.currentTarget.style.background = '#18191C'; }}
@@ -171,11 +174,12 @@ function SignIn() {
                 <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" />
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
               </svg>
-              Sign  with Google
+              Sign with Google
             </button>
 
             {/* Apple */}
             <button
+              className="auth-option-btn"
               type="button"
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', background: '#111213', border: '1px solid #232427', borderRadius: '10px', padding: '13px', color: '#fff', fontWeight: '700', fontSize: '1rem', cursor: 'pointer' }}
               onMouseEnter={e => { e.currentTarget.style.background = '#18191C'; }}
@@ -184,12 +188,12 @@ function SignIn() {
               <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
                 <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701" />
               </svg>
-              Sign with Applesss
+              Sign with Apple
             </button>
           </div>
 
           <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#6B7280' }}>
-            Don't have an accounts?{' '}
+            Don't have an account?{' '}
             <Link to="/signup" style={{ color: '#60A5FA', fontWeight: '600', textDecoration: 'none' }}>
               Sign up
             </Link>

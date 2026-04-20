@@ -22,6 +22,33 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const updateProfile = async ({ name, email, password }) => {
+    setAuthError('');
+    try {
+      const payload = {
+        name,
+        email,
+      };
+
+      if (password && password.trim()) {
+        payload.password = password;
+      }
+
+      const res = await apiRequest('/api/profile', {
+        method: 'PUT',
+        body: JSON.stringify(payload),
+      });
+
+      const updatedUser = res?.data || null;
+      setUser(updatedUser);
+      return { success: true, user: updatedUser };
+    } catch (error) {
+      const message = error?.message || 'Profile update failed';
+      setAuthError(message);
+      return { success: false, message };
+    }
+  };
+
   useEffect(() => {
     (async () => {
       setAuthLoading(true);
@@ -99,6 +126,7 @@ export function AuthProvider({ children }) {
       login,
       logout,
       refreshProfile,
+      updateProfile,
       clearAuthError,
     }),
     [user, authLoading, authError]

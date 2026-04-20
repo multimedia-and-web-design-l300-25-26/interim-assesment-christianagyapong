@@ -1,6 +1,17 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
+const getCookieOptions = () => {
+  const isProduction = process.env.NODE_ENV === "production";
+
+  return {
+    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    httpOnly: true,
+    sameSite: isProduction ? "none" : "lax",
+    secure: isProduction,
+  };
+};
+
 // Generate JWT token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -36,12 +47,7 @@ const registerUser = async (req, res) => {
       const token = generateToken(user._id);
       
       // Setup cookie options
-      const cookieOptions = {
-        expires: new Date(
-          Date.now() + 7 * 24 * 60 * 60 * 1000 // 7 days
-        ),
-        httpOnly: true,
-      };
+      const cookieOptions = getCookieOptions();
 
       res.status(201).cookie("token", token, cookieOptions).json({
         success: true,
@@ -97,12 +103,7 @@ const loginUser = async (req, res) => {
     const token = generateToken(user._id);
 
     // Setup cookie options
-    const cookieOptions = {
-      expires: new Date(
-        Date.now() + 7 * 24 * 60 * 60 * 1000 // 7 days
-      ),
-      httpOnly: true,
-    };
+    const cookieOptions = getCookieOptions();
 
     res.status(200).cookie("token", token, cookieOptions).json({
       success: true,
@@ -126,9 +127,13 @@ const loginUser = async (req, res) => {
 // @route   GET /api/auth/logout
 // @access  Public
 const logoutUser = async (req, res) => {
+  const isProduction = process.env.NODE_ENV === "production";
+
   res.cookie("token", "none", {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
+    sameSite: isProduction ? "none" : "lax",
+    secure: isProduction,
   });
 
   res.status(200).json({
