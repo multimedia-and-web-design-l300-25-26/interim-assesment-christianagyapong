@@ -25,10 +25,15 @@ const allowedOrigins = (process.env.FRONTEND_URL || "http://localhost:5173")
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
-
+// In development allow requests from any origin to simplify local testing
+// (still allow credentials). In production use FRONTEND_URL env to restrict
+// allowed origins.
 app.use(
   cors({
     origin: (origin, callback) => {
+      if (process.env.NODE_ENV !== "production") {
+        return callback(null, true);
+      }
       if (!origin || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
