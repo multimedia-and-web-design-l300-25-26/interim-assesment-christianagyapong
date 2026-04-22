@@ -1,4 +1,4 @@
-export const cryptoData = [     
+export const cryptoData = [      
   { 
     id: 'bitcoin', 
     name: 'Bitcoin', 
