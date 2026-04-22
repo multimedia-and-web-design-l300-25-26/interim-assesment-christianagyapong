@@ -1,6 +1,6 @@
 export const cryptoData = [      
   { 
-    id: 'bitcoin', 
+    id: 'bitcoin',  
     name: 'Bitcoin', 
     symbol: 'BTC',
     price: 1071956.06,
