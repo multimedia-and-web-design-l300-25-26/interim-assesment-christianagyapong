@@ -1,5 +1,5 @@
 export const cryptoData = [     
-  {
+  { 
     id: 'bitcoin', 
     name: 'Bitcoin', 
     symbol: 'BTC',
