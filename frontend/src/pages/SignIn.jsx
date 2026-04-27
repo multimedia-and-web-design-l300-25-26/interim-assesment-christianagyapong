@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import useReveal from '../hooks/useReveal';
@@ -9,8 +9,14 @@ function SignIn() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
-  const { login, clearAuthError } = useAuth();
+  const { login, clearAuthError, user } = useAuth();
   const formRef = useReveal();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +28,7 @@ function SignIn() {
     setIsSubmitting(false);
 
     if (result.success) {
-      navigate('/');
+      navigate('/dashboard');
       return;
     }
 

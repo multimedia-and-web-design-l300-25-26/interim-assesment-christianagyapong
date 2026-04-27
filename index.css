@@ -176,3 +176,58 @@ img {
   }
 }
 
+/* ═══ Dashboard Mobile Fixes ═══ */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-header-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .dashboard-header-row > div {
+    width: 100%;
+  }
+  .dashboard-header-row button {
+    width: 100%;
+    justify-content: center;
+  }
+  form[style*="grid-template-columns: 1fr 120px"],
+  form[style*="grid-template-columns: 1fr 110px"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ═══ Advanced Trading & Explore Grid Fixes ═══ */
+@media (max-width: 900px) {
+  .features-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .explore-hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Fix market tables in Advanced Trading */
+@media (max-width: 768px) {
+  div[style*="grid-template-columns: 2fr 1.5fr 1fr 1.5fr 1fr"] {
+    grid-template-columns: 2fr 1fr 1fr !important;
+  }
+  div[style*="grid-template-columns: 2fr 1.5fr 1fr 1.5fr 1fr"] > *:nth-child(2),
+  div[style*="grid-template-columns: 2fr 1.5fr 1fr 1.5fr 1fr"] > *:nth-child(4) {
+    display: none !important;
+  }
+}
+
+/* Dashboard Table Scroll Wrap */
+.table-scroll-wrap {
+  overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}

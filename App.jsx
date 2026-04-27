@@ -1,3 +1,4 @@
+import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './frontend/src/components/layout/Navbar';
 import Footer from './frontend/src/components/layout/Footer';

@@ -134,6 +134,9 @@
   display: inline-flex;
   animation: ticker 28s linear infinite;
 }
+.ticker-wrap:hover .ticker-inner {
+  animation-play-state: paused;
+}
 
 .glass-effect {
   background: rgba(255, 255, 255, 0.95);

@@ -73,8 +73,14 @@ function SignUp() {
   const [errorMessage, setErrorMessage] = useState('');
   const [hoveredType, setHoveredType] = useState(null);
   const navigate = useNavigate();
-  const { register, clearAuthError } = useAuth();
+  const { register, clearAuthError, user } = useAuth();
   const formRef = useReveal();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [user, navigate]);
 
   const handleSelectType = (typeId) => {
     setAccountType(typeId);

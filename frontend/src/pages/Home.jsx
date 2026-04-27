@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { cryptoData } from '../data/cryptoData';
 import { useLivePrices } from '../context/LivePricesContext';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function useReveal(options = {}) {
   const ref = useRef(null);
@@ -135,6 +137,15 @@ function PhoneMockup() {
 function Home() {
   const [activeTab, setActiveTab] = useState('spot');
   const liveData = useLivePrices();
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [user, navigate]);
+
   const topCryptos = (liveData ?? cryptoData).slice(0, 4);
 
   const exploreRef     = useReveal();
