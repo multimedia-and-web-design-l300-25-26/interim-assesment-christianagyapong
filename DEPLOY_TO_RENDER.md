@@ -38,6 +38,18 @@ Render deployment checklist for this project
   - VITE_API_BASE_URL = https://<your-render-backend-url>
 - Deploy.
 
+Note about "Publish directory dist does not exist":
+- Render looks for the `Publish Directory` relative to the Static Site's "Root Directory" setting. If your build runs inside the `frontend` folder and creates `frontend/dist`, you must either:
+  - Set Root Directory to `frontend` and keep Publish Directory as `dist`, OR
+  - Leave Root Directory empty (repo root) and set Publish Directory to `frontend/dist`.
+
+Recommended settings (easiest):
+- Root Directory: `frontend`
+- Build Command: `npm install && npm run build`
+- Publish Directory: `dist`
+
+This resolves the "Publish directory dist does not exist" error when Vite outputs `frontend/dist` during the build.
+
 5) Finalize
 - Set `FRONTEND_URL` in backend Render env to the frontend URL (with https). Redeploy backend.
 - Test signup/login on the frontend; confirm network requests use credentials and Set-Cookie header is present.

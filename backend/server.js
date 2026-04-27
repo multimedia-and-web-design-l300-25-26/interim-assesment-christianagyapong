@@ -16,6 +16,11 @@ if (process.env.NODE_ENV === "production") {
   app.set("trust proxy", 1);
 }
 
+// Debug: log important env values (non-sensitive) on start to help troubleshooting in Render logs
+console.log('NODE_ENV=' + (process.env.NODE_ENV || 'development'));
+console.log('FRONTEND_URL=' + (process.env.FRONTEND_URL || 'not set'));
+console.log('MONGODB_URI set=' + (!!process.env.MONGODB_URI));
+
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
@@ -31,12 +36,16 @@ const allowedOrigins = (process.env.FRONTEND_URL || "http://localhost:5173")
 app.use(
   cors({
     origin: (origin, callback) => {
+      // In development allow any origin (helps local testing). In production,
+      // only allow origins listed in FRONTEND_URL.
       if (process.env.NODE_ENV !== "production") {
         return callback(null, true);
       }
       if (!origin || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
+      console.warn('Blocked CORS request from origin:', origin);
+      console.warn('Allowed origins:', allowedOrigins);
       return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
